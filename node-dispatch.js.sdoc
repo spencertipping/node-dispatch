@@ -35,6 +35,7 @@ in this case.
   This requires a server that receives requests paired with a client that sends proxy requests. There is some minor URL rewriting, but nothing too bad. Each app definition in the routing table
   is read as the root folder of the URL.
 
+    process.on('uncaughtException', function (e) {console.log(e)});
     require('http').createServer(function (req, res) {
       var parts = /\/(\w+)(\/.*)/.exec(req.url);
       parts ? routing_table[parts[1]] ?
@@ -45,4 +46,4 @@ in this case.
                                                      response.on('data', function (data) {res.write(data)});
                                                      response.on('end',  function     () {res.end()})}),
          req.on('data', function (data) {request.write(data, 'binary')}),
-         req.on('end',  function     () {request.end()})) : console.log('Application not found: ' + parts[0]) : console.log('Invalid URL: ' + req.url)}).listen(8080, '0.0.0.0');
+         req.on('end',  function     () {request.end()})) : console.log('Application not found: ' + parts[1]) : console.log('Invalid URL: ' + req.url)}).listen(8080, '0.0.0.0');
