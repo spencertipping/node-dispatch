@@ -1,0 +1,14 @@
+Dispatch server for node.js | Spencer Tipping
+Licensed under the terms of the MIT source code license
+
+Motivation.
+Running multiple Node apps on a single server requires them to use different ports. This application routes HTTP requests to those different ports based on their URLs; for example, suppose you
+have this routing table:
+
+| foo on port 8081
+  bar on port 8082
+
+Any requests of the form "http://server/foo/..." will be routed as "http://server:8081/...", and requests to "http://server/bar/..." will go to "http://server:8082/...". You can update this
+routing table at runtime and it will be reread.
+
+
