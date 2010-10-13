@@ -21,7 +21,7 @@ in this case.
   Nothing bad happens if you have a line that doesn't make sense; the server just prints a warning message.
 
     var routing_table      = {},
-        read_routing_table = function (contents) {var lines = (contents || '').replace(/\#.*$/g, '').split(/\n\s*/);
+        read_routing_table = function (contents) {var lines = (contents || '').replace(/#.*(\n|$)/g, '$1').split(/\n\s*/);
                                                   routing_table = {};
                                                   console.log('Reading routing table');
                                                   for (var i = 0, l = lines.length, parts; i < l; ++i)
