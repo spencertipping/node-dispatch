@@ -27,9 +27,9 @@
                                                     (parts = /^\s*(\w+) on port (\d+)\s*$/.exec(lines[i])) ?  (routing_table[parts[1]] = 'localhost:' + parts[2]) :
                                                     (parts = /^\s*(\w+) on (\w+:\d+)\s*$/ .exec(lines[i])) ?  (routing_table[parts[1]] = parts[2]) :
                                                                                  /^\s*$/.test(lines[i]) || console.log('Bogus line in routing table: ' + lines[i])};
-    read_routing_table(require('fs').readFileSync(process.argv[2]));
+    read_routing_table(require('fs').readFileSync(process.argv[2], 'ascii'));
     require('fs').watchFile(process.argv[2], function () {
-      require('fs').readFile(process.argv[2], read_routing_table)});
+      require('fs').readFile(process.argv[2], 'ascii', read_routing_table)});
 
 //   Routing requests.
 //   This requires a server that receives requests paired with a client that sends proxy requests. There is some minor URL rewriting, but nothing too bad. Each app definition in the routing table
