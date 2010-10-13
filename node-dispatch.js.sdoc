@@ -23,10 +23,11 @@ in this case.
     var routing_table      = {},
         read_routing_table = function (contents) {var lines = (contents || '').replace(/\#.*$/g, '').split(/\n\s*/);
                                                   routing_table = {};
+                                                  console.log('Reading routing table');
                                                   for (var i = 0, l = lines.length, parts; i < l; ++i)
                                                     (parts = /^\s*(\w+) on port (\d+)\s*$/.exec(lines[i])) ?  (routing_table[parts[1]] = 'localhost:' + parts[2]) :
                                                     (parts = /^\s*(\w+) on (\w+:\d+)\s*$/ .exec(lines[i])) ?  (routing_table[parts[1]] = parts[2]) :
-                                                                                 /^\s*$/.test(lines[i]) || console.log('Bogus line in routing table: ' + lines[i])};
+                                                                                    /^\s*$/.test(lines[i]) || console.log('Bogus line in routing table: ' + lines[i])};
     read_routing_table(require('fs').readFileSync(process.argv[2], 'ascii'));
     require('fs').watchFile(process.argv[2], function () {
       require('fs').readFile(process.argv[2], 'ascii', function (err, data) {err ? console.log(err) : read_routing_table(data)})});
