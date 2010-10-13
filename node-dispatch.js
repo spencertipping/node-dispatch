@@ -39,7 +39,7 @@
       var parts = /\/(\w+)(\/.*)/.exec(req.url);
       parts ? routing_table[parts[1]] ?
         (request = require('http').createClient(Number(routing_table[parts[1]].split(/:/)[1]), routing_table[parts[1]].split(/:/)[0]).
-                                        request(req.type, parts[2]),
+                                        request(req.method, parts[2]),
          request.on('response', function (response) {response.setEncoding('binary');
                                                      res.writeHead(response.statusCode, response.headers);
                                                      response.on('data', function (data) {res.write(data)});
