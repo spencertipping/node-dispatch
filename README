@@ -1,0 +1,9 @@
+node-dispatch
+A simple node.js URL-to-port mapping server
+
+This server lets you host multiple node.js apps on one box by mapping base URLs to ports, e.g:
+
+  http://server/foo/... maps to http://server:8081/...
+  http://server/bar/... maps to http://server:8082/...
+
+See sdoc.html and routes.example for documentation.
