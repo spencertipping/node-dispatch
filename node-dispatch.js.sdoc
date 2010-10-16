@@ -41,10 +41,10 @@ in this case.
       var parts = /\/(\w+)(\/.*)/.exec(req.url);
       parts ? routing_table[parts[1]] ?
         (request = require('http').createClient(Number(routing_table[parts[1]].split(/:/)[1]), routing_table[parts[1]].split(/:/)[0]).
-                                        request(req.method, parts[2]),
+                                        request(req.method, parts[2], req.headers),
          request.on('response', function (response) {response.setEncoding('binary');
                                                      res.writeHead(response.statusCode, response.headers);
                                                      response.on('data', function (data) {res.write(data)});
                                                      response.on('end',  function     () {res.end()})}),
          req.on('data', function (data) {request.write(data, 'binary')}),
-         req.on('end',  function     () {request.end()})) : console.log('Application not found: ' + parts[1]) : console.log('Invalid URL: ' + req.url)}).listen(8080, '0.0.0.0');
+         req.on('end',  function     () {request.end()})) : console.log('Application not found: ' + parts[1]) : (res.end(), console.log('Invalid URL: ' + req.url))}).listen(8080, '0.0.0.0');
