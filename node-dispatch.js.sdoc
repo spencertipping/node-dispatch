@@ -47,4 +47,5 @@ in this case.
                                                      response.on('data', function (data) {res.write(data)});
                                                      response.on('end',  function     () {res.end()})}),
          req.on('data', function (data) {request.write(data, 'binary')}),
-         req.on('end',  function     () {request.end()})) : console.log('Application not found: ' + parts[1]) : (res.end(), console.log('Invalid URL: ' + req.url))}).listen(8080, '0.0.0.0');
+         req.on('end',  function     () {request.end()})) : (res.writeHead(500), res.end('Application not found: ' + parts[1])) :
+                                                            (res.writeHead(500), res.end('Invalid URL: ' + req.url))}).listen(8080, '0.0.0.0');
